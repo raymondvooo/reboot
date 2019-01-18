@@ -48,10 +48,10 @@ export class DemoInterceptor implements HttpInterceptor {
           } else if (req.url.includes('appUsers/logout')) {
             this.storage.deleteFromLocalStorage('user');
           } else if (req.url.includes('appUsers')) {
-            this.storage.saveToLocalStorage('user', req.body)
+            this.storage.saveToStorage('user', req.body)
             data = req.body;
           } else {
-            this.storage.addToItem('assesment', req.body)
+            this.storage.addToStorageItemObs('assesment', req.body)
             data = req.body;
             this.charts.push(req.body);
           }
