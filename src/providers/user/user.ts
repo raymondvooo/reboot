@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
   
 import { ENV }  from '@app/env';
@@ -38,37 +38,53 @@ export class UserProvider {
   }
 
   sendReg(user) {
-    if(ENV.mode === 'Development') {
-      this.storage.saveToLocalStorage('user', user)
-    } else {
       console.log('sendReg() runs', user)
       console.log(this.requestUrl)
       return this.http.post(this.requestUrl + '/appUsers', user)
-    }
   }
 
   //update data from wizard page and patch user model
   updateUserModel(data: any, id) {
+    let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     let token = window.sessionStorage.getItem('token');
     console.log(data, "#1-updateUserModel") 
-    return this.http.patch(this.requestUrl + '/appUsers/' + id + '?access_token=' + token , data)
+    return this.http.patch(this.requestUrl + '/appUsers/' + id + '?access_token=' + token , data, httpHeader)
+      // .subscribe(res => {
+      //   this.user = res;
+      //   this.storage.saveToStorage('user', res)
+      // })
   }
 
   login(creds) {
-      return this.http.post(this.requestUrl + '/appUsers/login', creds);
+      return this.http.post(this.requestUrl + '/appUsers/login', creds)
+        // .subscribe(res => {
+        //   this.user = res;
+        //   this.storage.saveToStorage('user', res)
+        // })
   }
   
   logoutUser(token:any) {
+    let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     console.log('onservice-logout')
-    return this.http.post(this.requestUrl + "/appUsers/logout", token )
+    // this.storage.emptyStorage();
+    return this.http.post(this.requestUrl + "/appUsers/logout", token, httpHeader )
   }
   
   getUser(id) {
+    let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     let token = window.sessionStorage.getItem('token');
-    return this.http.get(this.requestUrl + '/appUsers/' + id + '?access_token=' + token)
+    return this.http.get(this.requestUrl + '/appUsers/' + id + '?access_token=' + token, httpHeader)
+      // .subscribe(res => {
+      //   this.user = res;
+      //   this.storage.saveToStorage('user', res)
+      // })
   }
   getUserChart(id) {
+    let httpHeader = {headers: new HttpHeaders({cacheKey: 'chart'})}
     let token = window.sessionStorage.getItem('token');
-    return this.http.get(this.requestUrl + '/appUsers/' + id + '/charts?access_token=' + token)
+    return this.http.get(this.requestUrl + '/appUsers/' + id + '/charts?access_token=' + token, httpHeader)
+      // .subscribe(res => {
+      //   this.storage.saveToStorage('chart', res);
+      // })
   }
 }

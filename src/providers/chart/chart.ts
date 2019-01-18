@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { ENV } from '@app/env';
@@ -22,12 +22,15 @@ export class ChartProvider {
   constructor(public http: HttpClient, private storage: StorageProvider) { }
 
   addAssessment(assessment) {
-    return this.http.post(this.requestUrl, assessment);
+    let httpHeader = {headers: new HttpHeaders({cacheKey: 'charts'})}
+    return this.http.post(this.requestUrl, assessment, httpHeader);
   }
 
   getChartHistory() {
-    return this.http.get(this.requestUrl).map((res:any[])=>{
+    let httpHeader = {headers: new HttpHeaders({cacheKey: 'charts'})}
+    return this.http.get(this.requestUrl, httpHeader).map((res:any[])=>{
       //Initialized an array to store the values.
+      console.log(res)
       let allData:any = []
       res.map(x=>{
         //Maps the response from the API to a format that the history page will accept.
@@ -40,7 +43,8 @@ export class ChartProvider {
 
   mostRecentData() {
     //calls the API to get the assesments from the db
-    return this.http.get(this.requestUrl).map((res:any[])=>{
+    let httpHeader = {headers: new HttpHeaders({cacheKey: 'charts'})}
+    return this.http.get(this.requestUrl, httpHeader).map((res:any[])=>{
       //Returns all data, recent gets the last or most recent item from the DB
       try {
       let recent = res[res.length-1].data

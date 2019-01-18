@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -27,7 +27,16 @@ export class RssProvider {
     const count: any = 10;
     const API_URL: any = 'https://api.rss2json.com/v1/api.json';
 
-    const params = { params: new HttpParams().set('rss_url', 'https://www.va.gov/health/NewsFeatures/news.xml').set('api_key', 'l7cijr37lmx6omnmg74t5wpzpbdrtc7oagvbewja').set('order_by', 'pubDate').set('order_dir', 'desc').set('count', '20')}
+    const params = { 
+      params: new HttpParams()
+        .set('rss_url', 'https://www.va.gov/health/NewsFeatures/news.xml')
+        .set('api_key', 'l7cijr37lmx6omnmg74t5wpzpbdrtc7oagvbewja')
+        .set('order_by', 'pubDate')
+        .set('order_dir', 'desc')
+        .set('count', '20'),
+        headers: new HttpHeaders({cacheKey: 'rss'})
+      
+    }
 
     return this.http.get(API_URL, params);
   }
