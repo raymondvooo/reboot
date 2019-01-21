@@ -36,7 +36,6 @@
 //     Observable<HttpEvent<any>> {
 //       if (req.url === 'https://api.rss2json.com/v1/api.json') return next.handle(req);
 
-<<<<<<< HEAD
 //       if (ENV.mode === 'Development') {
 //         let data;
 //         if (req.method === 'POST') {
@@ -75,48 +74,6 @@
 //       } else {
 //         return next.handle(req);
 //       }
-=======
-     // Select mode for interceptor to run
-      if (ENV.mode === 'Demo') {
-        let data;
-        if (req.method === 'POST') {
-          if(req.url.includes('appUsers/login')) {
-            data = this.defaultUser;
-            // this.storage.retrieveFromLocalStorage('user').then((val:any)=> {
-            //   data = val? {...val, id: 1, userId: 1}: this.defaultUser
-            //   return this.createNewRequest(req, data, next);
-            // })
-          } else if (req.url.includes('appUsers/logout')) {
-            this.storage.deleteFromLocalStorage('user');
-          } else if (req.url.includes('appUsers')) {
-            this.storage.saveToLocalStorage('user', req.body)
-            data = req.body;
-          } else {
-            this.storage.addToItem('assesment', req.body)
-            data = req.body;
-            this.charts.push(req.body);
-          }
-        } else if (req.method === 'GET') {
-          if (req.url.includes('/charts')) {
-            // data = this.storage.retrieveFromLocalStorage('assesment')
-            data = this.charts
-          } else {
-            data = this.defaultUser;
-          } 
-        } else {
-            this.defaultUser = {...this.defaultUser, ...req.body}
-            data = this.defaultUser
-          // this.storage.retrieveFromLocalStorage('user').then((val: any) => {
-          //   data = val? {...val, ...req.body} : {...this.defaultUser, ...req.body}
-          //   this.storage.saveToLocalStorage('user', data);
-          // })
-        }
-        return this.createNewRequest(req, data, next)
-      } else {
-        console.log("else", req)
-        return next.handle(req);
-      }
->>>>>>> 85fd0f9d45229b3998652ddc1ab773c1739c8276
       
 //   }
 
