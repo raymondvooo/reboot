@@ -23,24 +23,28 @@ export class NewsWidgetComponent {
   getData() {
     this.rss.getRSS()
       .subscribe((newsData: NewsData) => {
-        this.rss.newsArray = newsData.items;
-        console.log(newsData, "Data");
-        console.log('News Array', this.rss.newsArray)
+        try {
+          this.rss.newsArray = newsData.items;
+          console.log(newsData, "Data");
+          console.log('News Array', this.rss.newsArray)
 
-        for (var i = 0; i < this.rss.newsArray.length; i++) {
-          var div = document.createElement('div');
-          div.innerHTML = this.rss.newsArray[i].description;
-          let text = div.getElementsByTagName('p')[0].innerHTML;
-          let sumText = text.substring(0, text.indexOf('<'));
-          let date = this.rss.newsArray[i].pubDate.substring(0,10)
+          for (var i = 0; i < this.rss.newsArray.length; i++) {
+            var div = document.createElement('div');
+            div.innerHTML = this.rss.newsArray[i].description;
+            let text = div.getElementsByTagName('p')[0].innerHTML;
+            let sumText = text.substring(0, text.indexOf('<'));
+            let date = this.rss.newsArray[i].pubDate.substring(0,10)
 
-          this.rss.newsArray[i].sumText = sumText;
-          this.rss.newsArray[i].link = div.getElementsByTagName('a')[0].getAttribute("href");;
-          this.rss.newsArray[i].date = date;
-          //splits thumbnail link to get higher resolution picture
-          let picText = this.rss.newsArray[i].thumbnail.split('_thumb');
-          let picture = picText[0] + "_1000" + picText[1];
-          this.rss.newsArray[i].picture = picture;      
+            this.rss.newsArray[i].sumText = sumText;
+            this.rss.newsArray[i].link = div.getElementsByTagName('a')[0].getAttribute("href");;
+            this.rss.newsArray[i].date = date;
+            //splits thumbnail link to get higher resolution picture
+            let picText = this.rss.newsArray[i].thumbnail.split('_thumb');
+            let picture = picText[0] + "_1000" + picText[1];
+            this.rss.newsArray[i].picture = picture;      
+          }
+        } catch(e){
+          console.error(e.error)
         }  
       })
   }
