@@ -9,37 +9,39 @@ import { StorageProvider } from '../storage/storage'
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
-*/ 
+*/
 @Injectable()
 export class UserProvider {
 
-  user: any = {
-    first: "Peter",
-    last: "Horton",
-    email: "peter@email.com",
-    maritalStatus: "Widowed",
-    employmentStatus: "Unemployed",
-    lastEmployed: "1/1/2010",
-    branch: "",
-    activeStatus: "",
+  userData: any = {
+    firstName: "",
+    lastName: "",
+    email: "",
+
+    maritalStatus: "",
+    employmentStatus: "",
+    lastEmployed: "",
+
+    militaryBranch: "",
+    veteranOrActive: "",
     separationDate: "",
-    serviceDisability: "",
-    disabilityRating: "",
     militaryRank: "",
-    mosNec: "",
+    disabilityStatus: "",
+    disabilityPercentage: "",
+    officerRank: "",
+    enlistingPay: "",
+    codeIdentifier: ""
   }
 
   requestUrl: string = ENV.url
+  userName: any = "Maurice";
 
-  userData: any = {};
 
   constructor(public http: HttpClient, private storage: StorageProvider) {
     console.log('Hello UserProvider Provider');
   }
-
   sendReg(user) {
       console.log('sendReg() runs', user)
-      console.log(this.requestUrl)
       return this.http.post(this.requestUrl + '/appUsers', user)
   }
 
@@ -52,22 +54,29 @@ export class UserProvider {
     return this.http.patch(this.requestUrl + '/appUsers/' + id + '?access_token=' + token , data, httpHeader)
   }
 
+  getCredentials(){
+    let userCredentials: any = {};
+    userCredentials.token = sessionStorage.getItem('token');
+    userCredentials.userId = sessionStorage.getItem('userId');
+    return userCredentials;
+  }
+
   login(creds) {
     let request = this.http.post(this.requestUrl + '/appUsers/login', creds)
     request.subscribe(res => {
-        this.user = res;
-        this.storage.saveToStorage('user', res).then(val => console.log(val))
+        this.userData = res;
+        this.storage.saveToStorage('user', res)
       })
     return request
   }
-  
+
   logoutUser(token:any) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     console.log('onservice-logout')
     this.storage.emptyStorage();
     return this.http.post(this.requestUrl + "/appUsers/logout", token, httpHeader )
   }
-  
+
   getUser(id) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     let token = window.sessionStorage.getItem('token');
@@ -79,4 +88,6 @@ export class UserProvider {
     let token = window.sessionStorage.getItem('token');
     return this.http.get(this.requestUrl + '/appUsers/' + id + '/charts?access_token=' + token, httpHeader)
   }
+
 }
+

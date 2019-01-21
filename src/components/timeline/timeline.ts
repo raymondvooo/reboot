@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Item } from 'ionic-angular';
-import { checkAndUpdateBinding } from '@angular/core/src/view/util';
+// import { Item } from 'ionic-angular';
+// import { checkAndUpdateBinding } from '@angular/core/src/view/util';
+// import { ActionItemProvider } from '../../providers/action-item/action-item'
 
 interface IGrandChild {
   title: string,
@@ -37,22 +38,23 @@ interface IParent {
   templateUrl: 'timeline.html'
 })
 export class TimelineComponent {
+  actionItem;
+
   constructor() {
     console.log('Hello TimelineComponent Component');
-    // this.text = 'Hello World';
-    
+    this.actionItem = this.list[0].children[0].children[0].title;
   }
 
   // Event function to update completion status of grandchild
   private updateCompleted(item: IGrandChild) {
     if (item.completed === false){
-        item.completed = true; 
+        item.completed = true;
     } else {
       item.completed = false;
     }
   }
     // Returns boolean value of granchild to child-level (one false g-child returns overall false value),returns child boolean value
-    // to parent (one false child returns overall false value), changes parent's "areAllStepsCompleted" value to true for ngClass/styling 
+    // to parent (one false child returns overall false value), changes parent's "areAllStepsCompleted" value to true for ngClass/styling
     // by checking boolean values of children.
   private trackProgress() {
     this.list.forEach((parentStep: IParent): any => {
@@ -80,13 +82,13 @@ export class TimelineComponent {
             {
               title: 'Find out your separation date',
               checkmark: true,
-              completed: false,
+              completed: true,
               children: []
             },
             {
               title: 'Complete Pre-Separation Counseling',
               checkmark: true,
-              completed: false,
+              completed: true,
               children: []
             }
           ]
@@ -320,7 +322,7 @@ export class TimelineComponent {
               children: []
             }
           ]
-        }    
+        }
       ]
     },
     {
@@ -630,12 +632,12 @@ export class TimelineComponent {
           ]
         }
       ]
-    }                  
+    }
   ];
 
   @Input('endIcon') endIcon = "ionic";
 
-  
+
   toggleItem(item){
     if(item.itemExpand){
       item.itemExpand = false;
@@ -643,6 +645,16 @@ export class TimelineComponent {
       item.itemExpand = true;
     }
   }
+  
+  // actionItem() {
+  
+    // console.log(firstItem);
+
+    // for(let i = 0; i < this.list.length; i++) {
+    //   for(let i = 0; i < )
+    // }
+  // }
+  
 }
 
 @Component({

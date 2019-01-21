@@ -65,7 +65,7 @@ export class ChartProvider {
       try {
       let recent = res[res.length-1].data
       //destructures the response object and places it into an array so that the chart can consume it.
-      let mostRecentChart = [recent.Career, recent.Finance, recent['Personal Growth'], recent.Health, recent.Family, recent.Relationships, recent['Social Life'], recent.Attitude]
+      let mostRecentChart = [recent.Career, recent.Finances, recent["Personal Growth"], recent.Health, recent.Family, recent.Relationships, recent["Social Life"], recent.Attitude]
       return mostRecentChart
       } catch(e) {
         return [];
@@ -75,4 +75,3 @@ export class ChartProvider {
 
   
 }
-
