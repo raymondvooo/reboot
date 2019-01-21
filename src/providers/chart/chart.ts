@@ -19,26 +19,42 @@ export class ChartProvider {
   assessmentChartData;
 
 
-  constructor(public http: HttpClient, private storage: StorageProvider) { }
+  constructor(public http: HttpClient, private _storage: StorageProvider) { }
 
   addAssessment(assessment) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'charts'})}
-    return this.http.post(this.requestUrl, assessment, httpHeader);
+    let request = this.http.post(this.requestUrl, assessment, httpHeader);
+    request.subscribe(res => {
+      this._storage.addToStorageArray('charts', assessment)
+    })
+    return request
   }
 
   getChartHistory() {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'charts'})}
-    return this.http.get(this.requestUrl, httpHeader).map((res:any[])=>{
-      //Initialized an array to store the values.
-      console.log(res)
-      let allData:any = []
-      res.map(x=>{
-        //Maps the response from the API to a format that the history page will accept.
-        allData.push({date: moment(x.date).format('MM/DD/YYYY'), value: [x.data.Career, x.data.Finance, x.data['Personal Growth'], x.data.Health, x.data.Family, x.data.Relationships, x.data['Social Life'], x.data.Attitude]})
-        return allData
-      })
-      return allData
+    let request = this.http.get(this.requestUrl, httpHeader)
+    request.subscribe( res => {
+      this._storage.saveToStorage('charts', res)
     })
+    return request.map((res:any[])=>{
+        //Initialized an array to store the values.
+        return res.map( x => {
+          //Maps the response from the API to a format that the history page will accept.
+          return {
+            date: moment(x.date).format('MM/DD/YYYY'), 
+            value: [
+              x.data.Career, 
+              x.data.Finance, 
+              x.data['Personal Growth'], 
+              x.data.Health, 
+              x.data.Family, 
+              x.data.Relationships, 
+              x.data['Social Life'], 
+              x.data.Attitude
+            ]
+          }
+        })
+      })
   }
 
   mostRecentData() {

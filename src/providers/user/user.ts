@@ -48,25 +48,23 @@ export class UserProvider {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     let token = window.sessionStorage.getItem('token');
     console.log(data, "#1-updateUserModel") 
+    this.storage.UpdateStorageObject('user', data)
     return this.http.patch(this.requestUrl + '/appUsers/' + id + '?access_token=' + token , data, httpHeader)
-      // .subscribe(res => {
-      //   this.user = res;
-      //   this.storage.saveToStorage('user', res)
-      // })
   }
 
   login(creds) {
-      return this.http.post(this.requestUrl + '/appUsers/login', creds)
-        // .subscribe(res => {
-        //   this.user = res;
-        //   this.storage.saveToStorage('user', res)
-        // })
+    let request = this.http.post(this.requestUrl + '/appUsers/login', creds)
+    request.subscribe(res => {
+        this.user = res;
+        this.storage.saveToStorage('user', res).then(val => console.log(val))
+      })
+    return request
   }
   
   logoutUser(token:any) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     console.log('onservice-logout')
-    // this.storage.emptyStorage();
+    this.storage.emptyStorage();
     return this.http.post(this.requestUrl + "/appUsers/logout", token, httpHeader )
   }
   
@@ -74,17 +72,11 @@ export class UserProvider {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     let token = window.sessionStorage.getItem('token');
     return this.http.get(this.requestUrl + '/appUsers/' + id + '?access_token=' + token, httpHeader)
-      // .subscribe(res => {
-      //   this.user = res;
-      //   this.storage.saveToStorage('user', res)
-      // })
   }
+
   getUserChart(id) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'chart'})}
     let token = window.sessionStorage.getItem('token');
     return this.http.get(this.requestUrl + '/appUsers/' + id + '/charts?access_token=' + token, httpHeader)
-      // .subscribe(res => {
-      //   this.storage.saveToStorage('chart', res);
-      // })
   }
 }

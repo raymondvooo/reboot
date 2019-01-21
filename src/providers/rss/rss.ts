@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { _ParseAST } from '@angular/compiler';
+import { StorageProvider } from '../storage/storage';
 
 
 /*
@@ -17,7 +19,7 @@ export class RssProvider {
   newsArray: any = {};
 
 
-  constructor(public http: HttpClient, public browser: InAppBrowser) {
+  constructor(public http: HttpClient, public browser: InAppBrowser, private _storage: StorageProvider) {
     console.log('Hello RssProvider Provider');
   }
 
@@ -37,9 +39,14 @@ export class RssProvider {
         headers: new HttpHeaders({cacheKey: 'rss'})
       
     }
-
-    return this.http.get(API_URL, params);
+    let request = this.http.get(API_URL, params)
+    request.subscribe(res => {
+        console.log('i fired')
+        this._storage.saveToStorage('rss', res)
+      });
+    return request
   }
+
   openLink(url) {
     const link = this.browser.create(url);
   }
