@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from '@ionic-native/network';
 // Providers
 import { NetworkProvider } from '../providers/network/network';
-
+import { StorageProvider } from '../providers/storage/storage';
 //Pages
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
@@ -22,6 +22,7 @@ import { ResourcesPage } from '../pages/resources/resources';
 
 // Env Variables
 import { ENV } from  '@app/env';
+
 
 
 @Component({
@@ -41,6 +42,7 @@ export class MyApp {
     private _networkProvider: NetworkProvider,
     public events: Events,
     public network: Network,
+    public _storage: StorageProvider,
     public toastCtrl: ToastController,
     ) {
       this.initializeApp()
@@ -79,7 +81,8 @@ export class MyApp {
       // // Online event
       this.events.subscribe('network:online', () => {
       //    // alert('network:online ==> '+this.network.type);  
-        this.presentToast("online")     
+        this.presentToast("online")
+        this._storage.completeCachedRequests()
       });
 
     });

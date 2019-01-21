@@ -17,7 +17,6 @@ export class StorageProvider {
 
 
   storeRequest(req) {
-    // console.log('request stored')
     let toast = this.toastCtrl.create({
       message: `Your data is stored locally because you seem to be offline.`,
       duration: 3000,
@@ -25,8 +24,8 @@ export class StorageProvider {
     });
     toast.present()
  
-    return fromPromise(this.storage.get(STORAGE_REQ_KEY))
-      .mergeMap(storedOperations => {
+    return this.storage.get(STORAGE_REQ_KEY)
+      .then(storedOperations => {
         let action = {
           url: req.url,
           method: req.method,
@@ -42,7 +41,7 @@ export class StorageProvider {
         } else {
           storedObj = [action];
         }
-        return fromPromise(this.storage.set(STORAGE_REQ_KEY, storedObj))
+        return this.storage.set(STORAGE_REQ_KEY, storedObj)
       });
   }
 
@@ -50,13 +49,12 @@ export class StorageProvider {
     this.retrieveFromStorage(STORAGE_REQ_KEY)
       .then(storedReqs => {
         if(storedReqs && storedReqs.length > 0) {
-          storedReqs.array.forEach((req, i) => {
+          storedReqs.forEach((req, i) => {
             this._http.request(req.method, req.url, {body: req.body, params: req.params})
-              .subscribe(res => {
-                if (req.method === 'GET') {
-                  this.addToStorageItemObs(req.cacheKey, res)
-                }
-              })
+              .subscribe()
+            if (i === storedReqs.length -1) {
+              this.deleteFromStorage(STORAGE_REQ_KEY)
+            }
           });
         }
       })
@@ -79,19 +77,30 @@ export class StorageProvider {
     return (fromPromise(this.storage.get(key)))
   }
 
-  deleteFromLocalStorage(key) {
+  deleteFromStorage(key) {
     return this.storage.remove(key)
   }
 
-  addToStorageItemObs(key, value): any {
-    return fromPromise(this.storage.get(key)
+  addToStorageArray(key, value) {
+    return this.storage.get(key)
       .then((val) => {  
         if(val) {
           value = val.concat([value])
           return this.storage.set(key, value)
         } 
           return this.storage.set(key, [value])
-      }))
+      })
+  }
+
+  UpdateStorageObject(key, value) {
+    return this.storage.get(key)
+    .then((val) => {  
+      if(val) {
+        value = {...value, ...val}
+        return this.storage.set(key, value)
+      } 
+        return this.storage.set(key, value)
+    })
   }
 
   emptyStorage() {
