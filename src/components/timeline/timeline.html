@@ -1,8 +1,8 @@
 <!-- Generated template for the TimelineComponent component -->
 
-<div class ="saveButton">
+<!-- <div class ="saveButton">
     <button ion-button round [color]="primary" (click)="trackProgress()">Save Progress</button>
-  </div>
+  </div> -->
 
 <div class="timeline">
     
@@ -19,7 +19,7 @@
             
             <!-- Bullet items -->
             <ion-item *ngIf="item.checkmark" no-padding text-wrap>
-              <ion-label>{{item.title}} {{item.completed}}</ion-label>
+              <ion-label class="bullet-item-label">{{item.title}} {{item.completed}}</ion-label>
               <ion-checkbox (ionChange)="updateCompleted(item)" color="dark" class="bulletItem" [checked]="item.completed" ></ion-checkbox>
             </ion-item>
 

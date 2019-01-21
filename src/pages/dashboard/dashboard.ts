@@ -6,6 +6,8 @@ import { ChartProvider } from '../../providers/chart/chart';
 import { UserProvider } from '../../providers/user/user';
 import * as moment from 'moment';
 import { NewsPage } from '../news/news';
+import { ActionItemProvider } from '../../providers/action-item/action-item';
+import { SelfAssessmentPage } from '../self-assessment/self-assessment';
 
 interface UserData {
   firstName: any,
@@ -22,13 +24,20 @@ export class DashboardPage {
   assessDate: any
   daysTilSep: any
   daysTilSepAbs: any
+  currentActionItem: String;
+  prevAssess: boolean = false;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public chartProvider: ChartProvider, 
     private toastCtrl: ToastController, 
     private storage: Storage,
-    public user: UserProvider) { }
+    public user: UserProvider,
+    public actionItem: ActionItemProvider) {
+     this.currentActionItem = this.actionItem.currentItem;
+    }
+
+  //  commenting out for demo
 
   ionViewWillLoad() {
     // this.storage.get('userInfo').then((val) => {
@@ -51,6 +60,7 @@ export class DashboardPage {
     this.user.getUserChart(window.sessionStorage.getItem('userId'))
     .subscribe( (data: Array<any>) => {
       if (!data.length) return
+      this.prevAssess = true;
       this.assessDate = moment(data[0].date.substring(0,10), "YYYY-MM-DD").toDate().getTime();
       let now = new Date().getTime();
       this.assessDate = Math.ceil((this.assessDate - now)/86400000);
@@ -61,6 +71,12 @@ export class DashboardPage {
       this.lastDate();
     });
   }
+
+  toSelfAssessment() {
+    this.navCtrl.setRoot(SelfAssessmentPage);
+  }
+
+  // End of comment for demo */
 
   toTimeline() {
     this.navCtrl.setRoot(TimelinePage);

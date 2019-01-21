@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Item } from 'ionic-angular';
-import { checkAndUpdateBinding } from '@angular/core/src/view/util';
+// import { Item } from 'ionic-angular';
+// import { checkAndUpdateBinding } from '@angular/core/src/view/util';
+// import { ActionItemProvider } from '../../providers/action-item/action-item'
 
 interface IGrandChild {
   title: string,
@@ -37,10 +38,11 @@ interface IParent {
   templateUrl: 'timeline.html'
 })
 export class TimelineComponent {
-
+  actionItem;
 
   constructor() {
     console.log('Hello TimelineComponent Component');
+    this.actionItem = this.list[0].children[0].children[0].title;
   }
 
   // Event function to update completion status of grandchild
@@ -80,13 +82,13 @@ export class TimelineComponent {
             {
               title: 'Find out your separation date',
               checkmark: true,
-              completed: false,
+              completed: true,
               children: []
             },
             {
               title: 'Complete Pre-Separation Counseling',
               checkmark: true,
-              completed: false,
+              completed: true,
               children: []
             }
           ]
@@ -643,6 +645,16 @@ export class TimelineComponent {
       item.itemExpand = true;
     }
   }
+  
+  // actionItem() {
+  
+    // console.log(firstItem);
+
+    // for(let i = 0; i < this.list.length; i++) {
+    //   for(let i = 0; i < )
+    // }
+  // }
+  
 }
 
 @Component({

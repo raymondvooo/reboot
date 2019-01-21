@@ -137,13 +137,10 @@ export class SelfAssessmentPage {
     toSubmit() {
       this.chartProvider.addAssessment(this.currentAssessment)
         .subscribe(res => {
+          console.log(this.currentAssessment);
           console.log('response:', res);
           this.navCtrl.setRoot(ResourcesPage);
         }, err => {
-          if (err.error === 'Operating on offline mode') {
-            this.storage.set('assesment', this.currentAssessment);
-            return this.navCtrl.setRoot(ResourcesPage);
-          }
           console.log(err);
           alert('Assessment was not submitted. Please resubmit assessment.')
         })
@@ -151,9 +148,8 @@ export class SelfAssessmentPage {
   
     lastDate() {
       let msg = this.date === undefined?
-                `You have not completed any assesments`:          
-                `Your last assessment was ${this.date} day(s) ago`
-
+                              `You have not completed any assesments`:          
+                              `Your last assessment was ${this.date} day(s) ago`
       let toast = this.toastCtrl.create({
         message: msg,
         duration: 2500,
