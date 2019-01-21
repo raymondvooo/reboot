@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/concatMap'
+import 'rxjs/add/operator/concatMapTo'
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { NetworkProvider, ConnectionStatusEnum } from '../../providers/network/network';
 import { ENV } from '@app/env';
@@ -12,7 +12,6 @@ import { StorageProvider } from '../../providers/storage/storage';
 /** Pass untouched request through to the next request handler. */
 @Injectable()
 export class OfflineInterceptor implements HttpInterceptor {
-  storage: Observable<any>
   constructor(private _network: NetworkProvider, private _storage: StorageProvider ){}
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
@@ -21,9 +20,6 @@ export class OfflineInterceptor implements HttpInterceptor {
         return next.handle(req)
       }
       if (this._network.previousStatus === ConnectionStatusEnum.Offline) {
-
-        this.storage = this._storage.storeRequest(req)
-        this.storage.subscribe(res => console.log(res))
         let data;
         switch (req.method) {
           case 'GET':
@@ -32,11 +28,12 @@ export class OfflineInterceptor implements HttpInterceptor {
               data = storedItem 
               return data? this.createNewRequest(req, data): next.handle(req)
             })
-          case "POST":
-            if(req.url.includes('appUsers/logout')) {
-              this._storage.emptyStorage()
-            }
+          // case "POST":
+          //   if(req.url.includes('appUsers/logout')) {
+          //     this._storage.emptyStorage()
+          //   }
           default:
+          this._storage.storeRequest(req)
           return this.createNewRequest(req, data)
         }
       } else {
