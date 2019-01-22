@@ -62,12 +62,7 @@ export class UserProvider {
   }
 
   login(creds) {
-    let request = this.http.post(this.requestUrl + '/appUsers/login', creds)
-    request.subscribe(res => {
-        this.userData = res;
-        this.storage.saveToStorage('user', res)
-      })
-    return request
+    return this.http.post(this.requestUrl + '/appUsers/login', creds)
   }
 
   logoutUser(token:any) {
@@ -80,7 +75,13 @@ export class UserProvider {
   getUser(id) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     let token = window.sessionStorage.getItem('token');
-    return this.http.get(this.requestUrl + '/appUsers/' + id + '?access_token=' + token, httpHeader)
+    let request = this.http.get(this.requestUrl + '/appUsers/' + id + '?access_token=' + token, httpHeader)
+    request.subscribe(res => {
+      console.log(res)
+        this.userData = res;
+        this.storage.saveToStorage('user', res)
+      })
+    return request
   }
 
   getUserChart(id) {

@@ -34,7 +34,6 @@ export class MyApp {
   userToken = window.sessionStorage.getItem('token')
 
   pages: Array<{title: string, component: any}>;
-  logout: any;
 
   constructor(
     public platform: Platform, 
@@ -61,7 +60,6 @@ export class MyApp {
       { title: 'Timeline', component: TimelinePage },
       { title: 'History', component: HistoryPage }, 
       { title: 'Resources', component: ResourcesPage },
-      { title: 'Logout', component: LoginPage }
     ];
 
   }
@@ -107,18 +105,18 @@ presentToast( message ) {
   toast.present();
 }
   openPage(page) {
-    if(page.title === 'Logout'){
-      this._user.logoutUser(this.userToken)
-        .subscribe(res => {
-          console.log(res);
-          this.nav.setRoot(page.component)
-        }, err =>  {
-          console.log(err);
-        })
-    } else {
       // Reset the content nav to have just this page
       // we wouldn't want the back button to show in this scenario
       this.nav.setRoot(page.component);
-    }
   }
+
+  logout() {
+    this._user.logoutUser(sessionStorage.getItem('token'))
+      .subscribe( _ => {
+      })
+      sessionStorage.clear()
+      this.nav.setRoot(LoginPage)
+
+  }
+
 }
