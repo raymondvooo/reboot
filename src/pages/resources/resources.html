@@ -15,10 +15,10 @@
 
 
 <ion-content>
-  <h1 id="title">
+  <h1 id="header-title">
     Hello, {{user.firstName}}!
   </h1>
-    <ion-card col-xl-8 offset-xl-2>
+    <ion-card class="resource-card" col-xl-8 offset-xl-2>
       <ion-card-content id="card-text">
         <h1>This page will provide helpful resources to aid you in your transition. 
           <span *ngIf="assessmentCompleted">Based on your self assessment, here are some areas which might require more focus than others.
@@ -34,13 +34,13 @@
         </ion-row>     
       </ion-card-content>
     </ion-card>
-    <ion-card *ngIf="assessmentCompleted" id="chartCard" col-xl-8 offset-xl-2>
+    <ion-card class="resource-card" *ngIf="assessmentCompleted" id="chartCard" col-xl-8 offset-xl-2>
     <!-- <ion-card *ngIf="assessmentCompleted" id="chartCard" col-xl-8 offset-xl-2> -->
       <ion-card-content>        
         <chart></chart>
       </ion-card-content>
     </ion-card>
-    <ion-card col-xl-8 offset-xl-2 *ngIf="assessmentCompleted">
+    <ion-card class="resource-card" col-xl-8 offset-xl-2 *ngIf="assessmentCompleted">
       <ion-card-header id='title'>
           Your lowest score on the self assessment is: <br><br>
           <b><em>{{userPro.userData.lowScoreName}}</em></b> 
@@ -57,39 +57,39 @@
 
     </ion-card>
     <div *ngIf="!assessmentCompleted">
-      <ion-card *ngFor="let res of resources" col-xl-8 offset-xl-2>
-        <ion-card-header id='title'>
-          {{res.title}}
-        </ion-card-header>
-          <ion-card-content id="card-text">
-            {{res.message}}
-            <ion-row>
-              <ion-col offset-3>
-                <img class="image" src={{res.img}} alt="">          
-              </ion-col>
-            </ion-row>
-            <ion-item id="card-text">
-              <span item-end>
-                <a (click)="openModal(res)">Learn more...</a>
-              </span>
-            </ion-item>
-          </ion-card-content>
-      </ion-card>
-    </div>
-    <div *ngIf="assessmentCompleted">
-      <ion-card *ngFor="let res of sortedResources" col-xl-8 offset-xl-2>
-        <ion-card-header id='title'>
-          {{res.title}}
-        </ion-card-header>
-          <ion-card-content id="card-text">
-            <img class="image" src={{res.img}} alt="" style="width: 50%; height: 100%">          
+      <ion-card class="resource-card" *ngFor="let res of resources" col-xl-8 offset-xl-2>
+        <ion-card-content class="resource-content">
+          <div class="img-left">
+            <img class="image" src={{res.img}} alt="" >          
+          </div>
+          <div class="resource-text">
+            <h4 id='title'>{{res.title}}</h4>
             <p id="resMessage">{{res.message}}</p>
             <ion-item id="card-text">
               <span item-end>
                 <a (click)="openModal(res)">Learn more...</a>
               </span>
             </ion-item>
-          </ion-card-content>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngIf="assessmentCompleted">
+      <ion-card class="resource-card" *ngFor="let res of sortedResources" col-xl-8 offset-xl-2>
+        <ion-card-content class="resource-content">
+          <div class="img-left">
+            <img class="image" src={{res.img}} alt="" >          
+          </div>
+          <div class="resource-text">
+            <h4 id='title'>{{res.title}}</h4>
+            <p id="resMessage">{{res.message}}</p>
+            <ion-item id="card-text">
+              <span item-end>
+                <a (click)="openModal(res)">Learn more...</a>
+              </span>
+            </ion-item>
+          </div>
+        </ion-card-content>
       </ion-card>
     </div>
     

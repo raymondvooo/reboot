@@ -264,7 +264,7 @@ export class WizardPage {
       codeIdentifier: this.thirdForm.value.MOS,
     }
     console.log(this.user.userData, this.LockSwipeToPrev)
-    this.user.updateUserModel(this.user.userData, window.sessionStorage.getItem('userId'))
+    this.user.updateUserModel(this.user.userData)
       .subscribe(
         (data) => {
           console.log(data, "YEY!!!!!!")
