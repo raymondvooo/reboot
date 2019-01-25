@@ -38,12 +38,12 @@
 
   <section>
     <ion-row>
-      <ion-segment>
+      <ion-segment *ngFor="let item of list" [(ngModel)]="sections">
         <ion-segment-button value="null1">
-          <span>Getting Out</span>
+          <span>{{item.title}}</span>
         </ion-segment-button>
         
-        <ion-segment-button value="null2">
+        <!-- <ion-segment-button value="null2">
             <span>Starting Up</span>
         </ion-segment-button>
 
@@ -63,15 +63,65 @@
           <span>Retiring</span>
         </ion-segment-button>
 
-        <ion-segment-button value="null">
+        <ion-segment-button value="null7">
           <span>Aging</span>
         </ion-segment-button>
 
-        <ion-segment-button value="null">
+        <ion-segment-button value="null8">
           <span>Dying</span>
-        </ion-segment-button>
+        </ion-segment-button> -->
       </ion-segment>
     </ion-row>
   </section>
+
+  <div [ngSwitch]="sections">
+    <ion-list *ngSwitchCase="'null1'">
+      <ion-item>
+        <h2>null1</h2>
+      </ion-item>
+    </ion-list>
+
+    <!-- <ion-list *ngSwitchCase="'null2'">
+      <ion-item>
+        <h2>null2</h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'null3'">
+      <ion-item>
+        <h2>null3</h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'null4'">
+      <ion-item>
+        <h2>null4</h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'null5'">
+      <ion-item>
+        <h2>null5</h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'null6'">
+      <ion-item>
+        <h2>null6</h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'null7'">
+      <ion-item>
+        <h2>null7</h2>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'null8'">
+      <ion-item>
+        <h2>null8</h2>
+      </ion-item>
+    </ion-list> -->
+  </div>
 
 </ion-content>
