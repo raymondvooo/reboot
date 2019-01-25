@@ -4,7 +4,7 @@
     <button ion-button round [color]="primary" (click)="trackProgress()">Save Progress</button>
   </div> -->
 
-<div class="timeline">
+<!-- <div class="timeline"> -->
     
     <!-- <ion-list class="border-thingy" text-wrap>
         <ng-template #recursiveList let-list>
@@ -32,4 +32,46 @@
         <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: list }"></ng-container>
     </ion-list> -->
 
-</div>
+<!-- </div> -->
+
+<ion-content scrollX="true">
+
+  <section>
+    <ion-row>
+      <ion-segment>
+        <ion-segment-button value="null1">
+          <span>Getting Out</span>
+        </ion-segment-button>
+        
+        <ion-segment-button value="null2">
+            <span>Starting Up</span>
+        </ion-segment-button>
+
+        <ion-segment-button value="null3">
+          <span>Taking Care of Myself</span>
+        </ion-segment-button>
+
+        <ion-segment-button value="null4">
+          <span>Reinventing Myself</span>
+        </ion-segment-button>
+
+        <ion-segment-button value="null5">
+          <span>Putting Down Roots</span>
+        </ion-segment-button>
+
+        <ion-segment-button value="null6">
+          <span>Retiring</span>
+        </ion-segment-button>
+
+        <ion-segment-button value="null">
+          <span>Aging</span>
+        </ion-segment-button>
+
+        <ion-segment-button value="null">
+          <span>Dying</span>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-row>
+  </section>
+
+</ion-content>
