@@ -55,9 +55,7 @@ export class RegisterPage {
     this.submitAttempt = true
     this._userService.sendReg(this.registerUser)
       .subscribe( (data: any) => {
-        this.storage.remove('userData')
-        this.storage.set('userData', data)
-        console.log('data from submitReg()', data)
+        this._userService.setCredentials(data);
         this.menuCtrl.enable(true);
         this.menuCtrl.swipeEnable(true);
       },
@@ -69,14 +67,14 @@ export class RegisterPage {
       }
       ) 
 
-      this._userService.login(this.registerUser)
-      .subscribe(
-        (res) => {
-          let loginResponse: any = res;
-          sessionStorage.setItem('userId', loginResponse.userId)
-          sessionStorage.setItem('token', loginResponse.token);
-          alert("you're logged in!")
-        });
+      // this._userService.login(this.registerUser)
+      // .subscribe(
+      //   (res) => {
+      //     let loginResponse: any = res;
+      //     sessionStorage.setItem('userId', loginResponse.userId)
+      //     sessionStorage.setItem('token', loginResponse.token);
+      //     alert("you're logged in!")
+      //t    });
   }
 
   goLogin() {

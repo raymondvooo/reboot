@@ -38,24 +38,32 @@ export class WizardPage {
 
   leftArrowVisible: boolean = false;
   rightArrowVisible: boolean = true;
+  vetValue: string = "";
+  SeparationQuestion: string = "";
+  disabilityQValue: string = "";
+  LockSwipeToPrev: boolean = true;
+  employedAnswer: string = "";
+  codeErrorMessage: string = "";
+
 
   @ViewChild(Slides) slides: Slides;
 
-  constructor(public alertCtrl: AlertController,
+  constructor(
+    public alertCtrl: AlertController,
     public navCtrl: NavController,
     private formBuilder: FormBuilder,
     public navParams: NavParams,
     public plt: Platform,
-    public user: UserProvider,
-  ) {
-    this.user.getUser(window.sessionStorage.getItem('userId'))
-    .subscribe((data: UserData) => {
-      this.name = data.firstName;
-    })
+    public user: UserProvider) {
 
-    this.firstFormFunct();
-    this.secondFormFunct();
-    this.thirdFormFunct();
+    this.user.getUser()
+      .subscribe((data: UserData) => {
+        this.name = data.firstName;
+      })
+  
+      this.firstFormFunct();
+      this.secondFormFunct();
+      this.thirdFormFunct();
     
   }
 
@@ -66,12 +74,6 @@ export class WizardPage {
     }, 300);
   }
 
-  vetValue: string = "";
-  SeparationQuestion: string = "";
-  disabilityQValue: string = "";
-  LockSwipeToPrev: boolean = true;
-  employedAnswer: string = "";
-  codeErrorMessage: string = "";
 
    //the logic that determines if slide should be locked from swiping and in which direction
   slideChanged() {
@@ -139,11 +141,11 @@ export class WizardPage {
     this.firstForm.controls.vetOrActive.valueChanges
       .subscribe(val => {
         // const enlistedPay = this.thirdForm.get('enlistedPay')
-        if (val == "Active" || "Guard/Reserve") {
-          this.SeparationQuestion = "When is your separation date?"
-          // enlistedPay.setValidators(Validators.compose([Validators.required,]));
-        } else if (val == "Veteran") {
+        if (val == "Veteran") {
           this.SeparationQuestion = "When was your separation date?"
+          // enlistedPay.setValidators(Validators.compose([Validators.required,]));
+        } else if (val == "Active" || "Guard/Reserve") {
+          this.SeparationQuestion = "When is your separation date?"
           // enlistedPay.clearValidators();
         }
         this.vetValue = val;
@@ -263,8 +265,8 @@ export class WizardPage {
       // enlistingPay: this.thirdForm.value.enlistedPay,
       codeIdentifier: this.thirdForm.value.MOS,
     }
-    console.log(this.user.userData, this.LockSwipeToPrev)
-    this.user.updateUserModel(this.user.userData, window.sessionStorage.getItem('userId'))
+
+    this.user.updateUserModel(this.user.userData)
       .subscribe(
         (data) => {
           console.log(data, "YEY!!!!!!")
@@ -273,12 +275,15 @@ export class WizardPage {
         },
         (err) => {
           console.log(err);
-          alert("Please try submitting again.")
+          // alert("Please try submitting again.")
         })
+        //Skip validation for demo purposes only
+        // this.slides.lockSwipeToNext(false);
+        // this.next();
   }
 
   setDashboardPage() {
-    this.navCtrl.setRoot(DashboardPage)
+    this.navCtrl.setRoot(DashboardPage) 
   }
 
   setAssessmentPage() {

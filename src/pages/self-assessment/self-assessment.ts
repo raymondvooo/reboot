@@ -97,42 +97,42 @@ export class SelfAssessmentPage {
       this.areas.forEach(x => this.currentAssessment.data[x.title] = 0);
     }
 
-    
-    
-  
-    ionViewWillLoad() {
-      // this.storage.get('chartData').then((val) => {
-      //   this.date = val ? val.Date : '';
-      //   // console.log('this.date:', this.date, 'val.Date:', val.Date)
-      // }).then(() => this.lastDate())
-      this.user.getUserChart(window.sessionStorage.getItem('userId'))
-      .subscribe( (data) => {
-        try {
-        this.date = moment(data[0].date, "YYYY-MM-DD").toDate().getTime();
-        let now = new Date().getTime();
-        this.date = Math.ceil((this.date - now)/86400000);
-        this.date = Math.abs(this.date);
-        } catch(e) {
-          return
-        }
-      }, error => {console.log("error")},
-      () => {
-        this.lastDate();
-      });
-    }
-  
-    toggleSection(area) {
-      console.log(area);
-      if (area.expand) {
-        area.expand = false;
-      } else {
-        area.expand = true;
-      }
-    }
-  
-    changeData(categoryIndex, score) {
-      this.currentAssessment.data[categoryIndex] = score;
-    }
+              
+              
+            
+              ionViewWillLoad() {
+                // this.storage.get('chartData').then((val) => {
+                //   this.date = val ? val.Date : '';
+                //   // console.log('this.date:', this.date, 'val.Date:', val.Date)
+                // }).then(() => this.lastDate())
+                this.user.getUserChart()
+                .subscribe( (data) => {
+                  try {
+                  this.date = moment(data[0].date, "YYYY-MM-DD").toDate().getTime();
+                  let now = new Date().getTime();
+                  this.date = Math.ceil((this.date - now)/86400000);
+                  this.date = Math.abs(this.date);
+                  } catch(e) {
+                    return
+                  }
+                }, error => {console.log("error")},
+                () => {
+                  this.lastDate();
+                });
+              }
+            
+              toggleSection(area) {
+                console.log(area);
+                if (area.expand) {
+                  area.expand = false;
+                } else {
+                  area.expand = true;
+                }
+              }
+            
+              changeData(categoryIndex, score) {
+                this.currentAssessment.data[categoryIndex] = score;
+              }
 
     toSubmit() {
       this.chartProvider.addAssessment(this.currentAssessment)
