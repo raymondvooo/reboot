@@ -31,7 +31,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-  userToken = window.sessionStorage.getItem('token')
+  userToken = window.sessionStorage.getItem('token');
 
   pages: Array<{title: string, component: any}>;
 
@@ -111,7 +111,7 @@ presentToast( message ) {
   }
 
   logout() {
-    this._user.logoutUser(sessionStorage.getItem('token'))
+    this._user.logoutUser()
       .subscribe( _ => {
       })
       sessionStorage.clear()

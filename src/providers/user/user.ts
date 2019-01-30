@@ -36,7 +36,6 @@ export class UserProvider {
   requestUrl: string = ENV.url
   userName: any = "Maurice";
 
-
   constructor(public http: HttpClient, private storage: StorageProvider) {
     console.log('Hello UserProvider Provider');
   }
@@ -48,34 +47,40 @@ export class UserProvider {
   //update data from wizard page and patch user model
   updateUserModel(data: any, id) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
-    let token = window.sessionStorage.getItem('token');
+    const creds = this.getCredentials()
     console.log(data, "#1-updateUserModel") 
     this.storage.UpdateStorageObject('user', data)
-    return this.http.patch(this.requestUrl + '/appUsers/' + id + '?access_token=' + token , data, httpHeader)
+    return this.http.patch(this.requestUrl + '/appUsers/' + creds.userId + '?access_token=' + creds.token, data, httpHeader)
   }
 
-  getCredentials(){
-    let userCredentials: any = {};
-    userCredentials.token = sessionStorage.getItem('token');
-    userCredentials.userId = sessionStorage.getItem('userId');
-    return userCredentials;
+  getCredentials() {
+    let userCreds: any = {};
+    userCreds.token = window.sessionStorage.getItem("token");
+    userCreds.userId = window.sessionStorage.getItem("userId");
+    return userCreds; 
+  }
+
+  setCredentials(resData){
+    window.sessionStorage.setItem( "token", resData.token);
+    window.sessionStorage.setItem( "userId", resData.userId);
   }
 
   login(creds) {
     return this.http.post(this.requestUrl + '/appUsers/login', creds)
   }
 
-  logoutUser(token:any) {
+  logoutUser() {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
+    const creds = this.getCredentials() 
     console.log('onservice-logout')
     this.storage.emptyStorage();
-    return this.http.post(this.requestUrl + "/appUsers/logout", token, httpHeader )
+    return this.http.post(this.requestUrl + "appUsers/logout?access_token=" + creds.token, {}, httpHeader);
   }
 
-  getUser(id) {
+  getUser() {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
-    let token = window.sessionStorage.getItem('token');
-    let request = this.http.get(this.requestUrl + '/appUsers/' + id + '?access_token=' + token, httpHeader)
+    const creds = this.getCredentials() 
+    let request = this.http.get(this.requestUrl + 'appUsers/' + this.getCredentials().userId + '?access_token=' + creds.token, httpHeader);
     request.subscribe(res => {
       console.log(res)
         this.userData = res;
@@ -84,11 +89,12 @@ export class UserProvider {
     return request
   }
 
-  getUserChart(id) {
+  getUserChart() {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'chart'})}
-    let token = window.sessionStorage.getItem('token');
-    return this.http.get(this.requestUrl + '/appUsers/' + id + '/charts?access_token=' + token, httpHeader)
+    const creds = this.getCredentials()
+    return this.http.get(this.requestUrl + 'appUsers/' + this.getCredentials().userId + '/charts?access_token=' + creds.token, httpHeader);
   }
+
 
 }
 
