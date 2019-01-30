@@ -635,16 +635,57 @@ export class TimelineComponent {
     }
   ];
 
+  public testList: any[] = [
+    {
+      name: 'Pizza',
+      section: 1,
+      children: [
+        {
+          name: 'Traditional'
+        },
+        {
+          name: 'Gourmet'
+        },
+        {
+          name: 'Best Seller'
+        }
+      ]
+    },
+    {
+      name: 'Drinks',
+      section: 2,
+      children: [
+        {
+          name: 'Coke',
+        },
+        {
+          name: 'Sprite',
+        },
+        {
+          name: 'Water',
+        }
+      ]
+    }
+  ]
+
   @Input('endIcon') endIcon = "ionic";
 
 
-  toggleItem(item){
-    if(item.itemExpand){
-      item.itemExpand = false;
-    } else {
-      item.itemExpand = true;
-    }
+  toggleSection(i) {
+    this.testList[i].open = !this.testList[i].open
   }
+
+  toggleItem(i, j) {
+    this.testList[i].children[j].open = !this.testList[i].children[j].open
+  }
+
+  // toggleItem(item){
+  //   if(item.itemExpand){
+  //     item.itemExpand = false;
+  //   } else {
+  //     item.itemExpand = true;
+  //   }
+  // }
   
   // actionItem() {
   

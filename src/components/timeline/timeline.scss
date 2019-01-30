@@ -198,4 +198,34 @@ background: #64c5b1;
         cursor: pointer;
     }
   }
+
+  .segment-md .segment-button {
+    min-height: 40px;
+    height: auto;
+    min-width: 90px;
+    line-height: 1.5rem !important;
+    white-space: normal;
+    margin: 0px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  section {
+    max-height: 100px;
+    min-height: 75px;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+  }
+
+  ion-row {
+    height: inherit;
+    align-items: flex-start;
+  }
+  .scroll-zoom-wrapper {
+    height: 100%;
+  }
+  
 }

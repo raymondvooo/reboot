@@ -4,13 +4,13 @@
     <button ion-button round [color]="primary" (click)="trackProgress()">Save Progress</button>
   </div> -->
 
-<div class="timeline">
+<!-- <div class="timeline">
     
     <ion-list class="border-thingy" text-wrap>
         <ng-template #recursiveList let-list>
           <ion-list *ngFor="let item of list">
 
-            <div class="subLists">
+            <div>
               <ion-item *ngIf="!item.checkmark" (click)="toggleItem(item)" no-padding text-wrap>
                   <div *ngIf="item.dot" class="cd-timeline__img cd-timeline__img--5"></div>
                   <h2 [ngClass]="{'cd-timeline--top-level': item.topLevel, 'cd-timeline--sectionDone': item.areAllStepsCompleted}"><strong>{{item.title}}</strong></h2>
@@ -32,114 +32,93 @@
         <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: list }"></ng-container>
     </ion-list>
 
-</div>
+</div> -->
 
-<ion-content scrollX="true">
-
+<ion-content>
   <section>
-    <ion-row>
-      <ion-segment *ngFor="let item of list" [(ngModel)]="sections">
-        <ion-segment-button value="{{item.title}}">
-          <span>{{item.title}}</span>
-        </ion-segment-button>
-      </ion-segment>
 
-      <!-- <ion-segment [(ngModel)]="sections">
-        <ion-segment-button value="null1">
-          <span>Getting Out</span>
-        </ion-segment-button>
-      </ion-segment>
+    <ion-scroll scrollX="true" style=" white-space:nowrap; height: 100%; width: 100%; max-width: 700px">
+      <ion-row padding-top nowrap style="width: auto;">
 
-      <ion-segment [(ngModel)]="sections">
-        <ion-segment-button value="null2">
-          <span>Starting Up</span>
-        </ion-segment-button>
-      </ion-segment>
+        <ion-segment [(ngModel)]="subject" style="width: inherit ">
+          <ion-segment-button value="0">
+            Getting Out
+          </ion-segment-button>
 
-      <ion-segment [(ngModel)]="sections">
-        <ion-segment-button value="null3">
-          <span>Taking Care of Myself</span>
-        </ion-segment-button>
-      </ion-segment>
+          <ion-segment-button value="1">
+            Starting Up
+          </ion-segment-button>
 
-      <ion-segment [(ngModel)]="sections">
-        <ion-segment-button value="null4">
-          <span>Reinventing Myself</span>
-        </ion-segment-button>
-      </ion-segment>
+          <ion-segment-button value="2">
+            Self Care
+          </ion-segment-button>
 
-      <ion-segment [(ngModel)]="sections">
-        <ion-segment-button value="null5">
-          <span>Putting Down Roots</span>
-        </ion-segment-button>
-      </ion-segment>
+          <ion-segment-button value="3">
+            Reinventing Myself
+          </ion-segment-button>
 
-      <ion-segment [(ngModel)]="sections">
-        <ion-segment-button value="null6">
-          <span>Retiring</span>
-        </ion-segment-button>
-      </ion-segment>
+          <ion-segment-button value="4">
+            Settling Down
+          </ion-segment-button>
+        </ion-segment>
 
-      <ion-segment [(ngModel)]="sections">
-        <ion-segment-button value="null7">
-          <span>Aging</span>
-        </ion-segment-button>
-      </ion-segment>
-
-      <ion-segment [(ngModel)]="sections">
-        <ion-segment-button value="null8">
-          <span>Dying</span>
-        </ion-segment-button>
-      </ion-segment> -->
-    </ion-row>
+      </ion-row>
+    </ion-scroll>
   </section>
 
-  <div *ngFor="let item of list" [ngSwitch]="sections">
-    <ion-list *ngSwitchCase="item.title">
+  <div *ngFor="let item of testList; let i = index" [ngSwitch]="subject">
+
+    <ion-list *ngSwitchCase="i">
+      <ion-list-header no-lines no-padding>
+        <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section-inactive': !item.open}">
+          <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
+          <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
+          {{item.name}}
+        </button>
+
+        <ion-list *ngIf="item.children && item.open" no-lines>
+          <ion-list-header *ngFor="let child of item.children" no-padding>
+            <button ion-item detail-none class="child-item">
+              {{child.name}}
+            </button>
+          </ion-list-header>
+        </ion-list>
+      </ion-list-header>
+    </ion-list>
+
+    <!-- <ion-list *ngSwitchCase="'Starting Up'">
       <ion-item>
-        <h2>{{item.title}}</h2>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+        <h2>Case 2</h2>
       </ion-item>
     </ion-list>
 
-    <!-- <ion-list *ngSwitchCase="'null2'">
+    <ion-list *ngSwitchCase="'Self Care'">
       <ion-item>
-        <h2>null2</h2>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+        <h2>Case 3</h2>
       </ion-item>
     </ion-list>
-    
-    <ion-list *ngSwitchCase="'null3'">
+
+    <ion-list *ngSwitchCase="'Reinventing Myself'">
       <ion-item>
-        <h2>null3</h2>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+        <h2>Case 4</h2>
       </ion-item>
     </ion-list>
-    
-    <ion-list *ngSwitchCase="'null4'">
+
+    <ion-list *ngSwitchCase="'Settling Down'">
       <ion-item>
-        <h2>null4</h2>
-      </ion-item>
-    </ion-list>
-    
-    <ion-list *ngSwitchCase="'null5'">
-      <ion-item>
-        <h2>null5</h2>
-      </ion-item>
-    </ion-list>
-    
-    <ion-list *ngSwitchCase="'null6'">
-      <ion-item>
-        <h2>null6</h2>
-      </ion-item>
-    </ion-list>
-    
-    <ion-list *ngSwitchCase="'null7'">
-      <ion-item>
-        <h2>null7</h2>
-      </ion-item>
-    </ion-list>
-    
-    <ion-list *ngSwitchCase="'null8'">
-      <ion-item>
-        <h2>null8</h2>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+        <h2>Case 5</h2>
       </ion-item>
     </ion-list> -->
   </div>
