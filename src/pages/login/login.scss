@@ -51,15 +51,6 @@ page-login {
     //     align-content: center;
     // }
 
-    #login-form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        bottom: 0;
-        // max-width: 700px;
-        height: 85vh;
-    }
-
     #password:before {
         font-family: "Font Awesome 5 Free";
         font-size: 30px;
@@ -155,6 +146,15 @@ page-login {
 
         .labels {
             font-size: 2em;
+        }
+
+        #login-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            bottom: 0;
+            // max-width: 700px;
+            height: 85vh;
         }
 
 
