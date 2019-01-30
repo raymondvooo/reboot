@@ -18,14 +18,14 @@
     <form [formGroup]="loginCreds" (ngSubmit)="login()">
     
       <ion-row justify-content-center>
-        <ion-col col-11 col-xl-6>
+        <ion-col col-11>
           <h2 text-center>Transitioning from the military to civilian environment is more than just a job change.</h2>
           <h2 id="lifechange" text-center>It's a life change.</h2>
         </ion-col>
       </ion-row>
   
       <ion-row justify-content-center>
-        <ion-col col-11 col-xl-7>
+        <ion-col col-11>
           <ion-label class="labels" stacked>
             EMAIL ADDRESS
             <!-- <span
@@ -47,7 +47,7 @@
       </ion-row> -->
   
       <ion-row justify-content-center>
-        <ion-col col-11 col-xl-7>
+        <ion-col col-11>
           <ion-label class="labels" stacked>PASSWORD</ion-label>
           <ion-input formControlName="password" class="inputs" id="password" type="password"></ion-input>
         </ion-col>
@@ -62,21 +62,21 @@
       </ion-row> -->
   
       <ion-row justify-content-center>
-        <ion-col class="button-col" col-11 col-xl-7>
+        <ion-col class="button-col" col-11>
           <button id="loginbutton" type="submit" ion-button block [disabled]="!loginCreds.valid">LOGIN</button>
         </ion-col>
       </ion-row>
   
       <ion-row>
         <ion-col col-1></ion-col> 
-        <ion-col col-10 col-xl-7>
+        <ion-col col-10>
           <h3 text-center>If you don't have an account yet, you can register now.</h3>
         </ion-col>
         <ion-col col-1></ion-col>
       </ion-row>
   
       <ion-row justify-content-center>
-        <ion-col class="button-col" col-11 col-xl-7>
+        <ion-col class="button-col" col-11>
           <button (click)="toRegisterPage()" id="signupbutton" ion-button block>SIGN UP</button>
         </ion-col>
       </ion-row>
