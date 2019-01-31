@@ -636,33 +636,119 @@ export class TimelineComponent {
   ];
 
   public testList: any[] = [
+    // {
+    //   name: 'Pizza',
+    //   children: [
+    //     {
+    //       name: 'Traditional'
+    //     },
+    //     {
+    //       name: 'Gourmet'
+    //     },
+    //     {
+    //       name: 'Best Seller'
+    //     }
+    //   ]
+    // },
+    // {
+    //   name: 'Drinks',
+    //   children: [
+    //     {
+    //       name: 'Coke',
+    //     },
+    //     {
+    //       name: 'Sprite',
+    //     },
+    //     {
+    //       name: 'Water',
+    //     }
+    //   ]
+    // }
     {
-      name: 'Pizza',
-      section: 1,
-      children: [
+      id: 'gettingOut',
+      childrenSection: [
         {
-          name: 'Traditional'
+          title: 'Understanding the Process of Separating',
+          grandchildrenItems: [
+            {
+              name: 'Find out your separation date'
+            },
+            {
+              name: 'Complete Pre-Separation Counseling'
+            }
+          ]
         },
         {
-          name: 'Gourmet'
+          title: 'Completing My Paperwork',
+          grandchildrenItems: [
+            {
+              name: 'Prepare a criterion-based Individual Transition Plan (ITP)'
+            },
+            {
+              name: 'Complete a Continuum of Military Service Opportunity Counseling (Required Active Component Only)'
+            },
+            {
+              name: 'Evaluate transferability of military skills to civilian workforce'
+            },
+            {
+              name: 'Complete DoD Standardized Gap Analysis'
+            },
+            {
+              name: 'Document requirements and eligibility for licensure, certification, and apprenticeship'
+            },
+            {
+              name: 'Complete an assessment tool to identify personal interests and leanings regarding career selection'
+            },
+            {
+              name: 'Complete a job application package or receive a job offer letter'
+            },
+            {
+              name: 'Receive a DOL Gold Card and understand post 9/11 Veterans have priority at DOL American Job Centers'
+            }
+          ]
         },
         {
-          name: 'Best Seller'
+          title: 'Engaging VA to Access Benefits',
+          grandchildrenItems: [
+            {
+              name: 'Complete the Veteran Affairs (VA) Benefits Briefings I and II'
+            },
+            {
+              name: 'Register on eBenefits'
+            }
+          ]
         }
       ]
     },
     {
-      name: 'Drinks',
-      section: 2,
-      children: [
+      id: 'startingUp',
+      childrenSection: [
         {
-          name: 'Coke',
+          title: 'Find Something to Do',
+          grandchildrenItems: [
+            {
+              name: 'Go to Career Center'
+            },
+            {
+              name: 'Vocational Rehab & Employment'
+            }
+          ]
         },
         {
-          name: 'Sprite',
+          title: 'Re-establishing and creating relationships',
+          grandchildrenItems: [
+            {
+              name: 'Check out vet center'
+            }
+          ]
         },
         {
-          name: 'Water',
+          title: 'Balancing finances',
+          grandchildrenItems: [
+            {
+              name: 'Open a savings account'
+            }
+          ]
         }
       ]
     }
@@ -671,8 +757,9 @@ export class TimelineComponent {
   @Input('endIcon') endIcon = "ionic";
 
 
-  toggleSection(i) {
-    this.testList[i].open = !this.testList[i].open
+  toggleSection(i, j) {
+    // this.testList[i].open = !this.testList[i].open
+    this.testList[i].childrenSection[j].open = !this.testList[i].childrenSection[j].open
   }
 
   toggleItem(i, j) {

@@ -69,8 +69,8 @@
   <div *ngFor="let item of testList; let i = index" [ngSwitch]="subject">
 
     <ion-list *ngSwitchCase="i">
-      <ion-list-header no-lines no-padding>
-        <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section-inactive': !item.open}">
+      <!-- <ion-list-header no-lines no-padding>
+        <button ion-item (click)="toggleSection(i)" detail-none>
           <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
           <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
           {{item.name}}
@@ -80,6 +80,22 @@
           <ion-list-header *ngFor="let child of item.children" no-padding>
             <button ion-item detail-none class="child-item">
               {{child.name}}
+            </button>
+          </ion-list-header>
+        </ion-list>
+      </ion-list-header> -->
+
+      <ion-list-header *ngFor="let child of item.childrenSection; let j = index" no-lines no-padding>
+        <button ion-item (click)="toggleSection(i, j)" detail-none>
+          <ion-icon item-left name="arrow-forward" *ngIf="!child.open"></ion-icon>
+          <ion-icon item-left name="arrow-down" *ngIf="child.open"></ion-icon>
+          {{child.title}}
+        </button>
+
+        <ion-list *ngIf="child.grandchildrenItems && child.open">
+          <ion-list-header *ngFor="let grandchild of child.grandchildrenItems" no-lines no-padding>
+            <button ion-item detail-none>
+              {{grandchild.name}}
             </button>
           </ion-list-header>
         </ion-list>
