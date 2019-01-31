@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-/**
- * Generated class for the TimelineChildSublistComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'timeline-child-sublist',
   templateUrl: 'timeline-child-sublist.html'
 })
 export class TimelineChildSublistComponent {
 
-  text: string;
+  @Input() testInput: number;
 
   constructor() {
-    console.log('Hello TimelineChildSublistComponent Component');
-    this.text = 'Hello World';
   }
+
+  public childList: any[] = [
+    {
+      title: 'test0'
+    },
+    {
+      title: 'test1'
+    },
+    {
+      title: 'test2'
+    },
+    {
+      title: 'test3'
+    },
+    {
+      title: 'test4'
+    }
+  ]
 
 }

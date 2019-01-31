@@ -30,7 +30,7 @@
     </ion-scroll>
   </section>
 
-  <div *ngFor="let item of testList; let i = index" [ngSwitch]="subject">
+  <!-- <div *ngFor="let item of testList; let i = index" [ngSwitch]="subject">
 
     <ion-list *ngSwitchCase="i">
       <ion-list-header *ngFor="let child of item.childrenSection; let j = index" no-lines no-padding>
@@ -48,6 +48,68 @@
           </ion-list-header>
         </ion-list>
       </ion-list-header>
+    </ion-list>
+  </div> -->
+
+  <div [ngSwitch]="subject">
+    <ion-list *ngSwitchCase="0">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+        
+        <h2>Case 0</h2>
+
+        <timeline-child-sublist testInput={{subject}}></timeline-child-sublist>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="1">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+
+        <h2>Case 1</h2>
+
+        <timeline-child-sublist testInput={{subject}}></timeline-child-sublist>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="2">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+
+        <h2>Case 2</h2>
+
+        <timeline-child-sublist testInput={{subject}}></timeline-child-sublist>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="3">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+
+        <h2>Case 3</h2>
+
+        <timeline-child-sublist testInput={{subject}}></timeline-child-sublist>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="4">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-puppy-1.jpg">
+        </ion-thumbnail>
+
+        <h2>Case 4</h2>
+        
+        <timeline-child-sublist testInput={{subject}}></timeline-child-sublist>
+      </ion-item>
     </ion-list>
   </div>
 
