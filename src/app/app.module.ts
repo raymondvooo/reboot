@@ -38,6 +38,8 @@ import { httpInterceptorProviders } from './http-interceptors/index';
 import { TimelineComponent } from '../components/timeline/timeline';
 import { ActionItemProvider } from '../providers/action-item/action-item';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+import { TimelineChildSublistComponent } from '../components/timeline-child-sublist/timeline-child-sublist';
+import { TimelineGrandchildSublistComponent } from '../components/timeline-grandchild-sublist/timeline-grandchild-sublist';
 
 
 const Pages = [
@@ -67,7 +69,9 @@ const Pages = [
     NewsWidgetComponent,
     TimelineComponent,
     ResourcesPage,
-    ProgressBarComponent
+    ProgressBarComponent,
+    TimelineChildSublistComponent,
+    TimelineGrandchildSublistComponent
   ],
   imports: [
     BrowserModule,
