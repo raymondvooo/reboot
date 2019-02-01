@@ -1,5 +1,5 @@
 <h1>Value {{segmentValue}}</h1>
 
 <div *ngFor="let title of childList">
-  <button *ngIf="title.indexValue == segmentValue" ion-item>{{title.titleSubject}}</button>
+  <button *ngIf="title.indexValue === segmentValue" ion-item>{{title.titleSubject}}</button>
 </div>
