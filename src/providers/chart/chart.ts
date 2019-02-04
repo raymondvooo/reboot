@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { ENV } from '@app/env';
 import { StorageProvider } from '../storage/storage'
-import { toObservable } from '@angular/forms/src/validators';
-import { of as observableOf } from 'rxjs/observable/of'
+import 'rxjs/add/operator/mergeMap';
 
 
 @Injectable()
@@ -23,38 +22,43 @@ export class ChartProvider {
 
   addAssessment(assessment) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'charts'})}
-    let request = this.http.post(this.requestUrl, assessment, httpHeader);
-    request.subscribe(res => {
-      this._storage.addToStorageArray('charts', assessment)
-    })
-    return request
+    this._storage.addToStorageArray('charts', assessment)
+    return this.http.post(this.requestUrl, assessment, httpHeader);
   }
 
   getChartHistory() {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'charts'})}
     let request = this.http.get(this.requestUrl, httpHeader)
-    request.subscribe( res => {
-      this._storage.saveToStorage('charts', res)
-    })
-    return request.map((res:any[])=>{
-        //Initialized an array to store the values.
-        return res.map( x => {
-          //Maps the response from the API to a format that the history page will accept.
-          return {
-            date: moment(x.date).format('MM/DD/YYYY'), 
-            value: [
-              x.data.Career, 
-              x.data.Finance, 
-              x.data['Personal Growth'], 
-              x.data.Health, 
-              x.data.Family, 
-              x.data.Relationships, 
-              x.data['Social Life'], 
-              x.data.Attitude
-            ]
+    
+    return this._storage.retrieveFromStorageObs('charts')
+      .mergeMap(storedCharts => {
+
+        return request.map((res:any[])=>{
+          if (!storedCharts) {
+            this._storage.saveToStorage('charts', res)
           }
+
+          //Initialized an array to store the values.
+          return res.map( x => {
+            //Maps the response from the API to a format that the history page will accept.
+            return {
+              date: moment(x.date).format('MM/DD/YYYY'), 
+              value: [
+                x.data.Career, 
+                x.data.Finance, 
+                x.data['Personal Growth'], 
+                x.data.Health, 
+                x.data.Family, 
+                x.data.Relationships, 
+                x.data['Social Life'], 
+                x.data.Attitude
+              ]
+            }
+          })
         })
+
       })
+    
   }
 
   mostRecentData() {
