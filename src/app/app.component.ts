@@ -73,13 +73,10 @@ export class MyApp {
       // Offline event
       this.events.subscribe('network:offline', () => {
       // alert('network:offline ==> '+this.network.type); 
-        this.presentToast("No Network");
       });
-
       // // Online event
       this.events.subscribe('network:online', () => {
       //    // alert('network:online ==> '+this.network.type);  
-        this.presentToast("online")
         this._storage.completeCachedRequests()
       });
 
@@ -89,21 +86,6 @@ export class MyApp {
     });
   }
 
-
-presentToast( message ) {
-  let toast = this.toastCtrl.create({
-    message: message,
-    duration: 3000,
-    position: 'top',
-    cssClass: 'toaster'
-  });
-
-  toast.onDidDismiss(() => {
-    console.log('Dismissed toast');
-  });
-
-  toast.present();
-}
   openPage(page) {
       // Reset the content nav to have just this page
       // we wouldn't want the back button to show in this scenario
