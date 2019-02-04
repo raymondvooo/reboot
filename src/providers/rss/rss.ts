@@ -36,15 +36,9 @@ export class RssProvider {
         .set('order_by', 'pubDate')
         .set('order_dir', 'desc')
         .set('count', '20'),
-        headers: new HttpHeaders({cacheKey: 'rss'})
-      
     }
-    let request = this.http.get(API_URL, params)
-    request.subscribe(res => {
-        console.log('i fired')
-        this._storage.saveToStorage('rss', res)
-      });
-    return request
+    
+    return this.http.get(API_URL, params)
   }
 
   openLink(url) {

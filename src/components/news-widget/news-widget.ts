@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { RssProvider } from '../../providers/rss/rss';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { StorageProvider } from '../../providers/storage/storage';
+
 interface NewsData {
   items: Array<any>
 }
@@ -15,7 +17,9 @@ export class NewsWidgetComponent {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public rss: RssProvider,
-    private browser: InAppBrowser) {
+    private browser: InAppBrowser,
+    private _storage: StorageProvider,
+  ) {
     this.getData();
   }
 
@@ -29,6 +33,7 @@ export class NewsWidgetComponent {
       .subscribe((newsData: NewsData) => {
         try {
           this.rss.newsArray = newsData.items;
+          this._storage.saveToStorage('rss', newsData.items)
           console.log(newsData, "Data");
           console.log('News Array', this.rss.newsArray)
 
