@@ -36,6 +36,7 @@ export class RssProvider {
         .set('order_by', 'pubDate')
         .set('order_dir', 'desc')
         .set('count', '20'),
+        headers: new HttpHeaders({cacheKey: 'rss'})
     }
     
     return this.http.get(API_URL, params)
