@@ -28,10 +28,6 @@ export class OfflineInterceptor implements HttpInterceptor {
               data = storedItem 
               return data? this.createNewRequest(req, data): next.handle(req)
             })
-          case "POST":
-            
-          case 'PATCH':
-            this._storage.UpdateStorageObject(req.headers.get('cacheKey'), data)
           default:
           this._storage.storeRequest(req)
           return this.createNewRequest(req, data)
