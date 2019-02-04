@@ -36,7 +36,7 @@ export class UserProvider {
   requestUrl: string = ENV.url
   userName: any = "Maurice";
 
-  constructor(public http: HttpClient, private storage: StorageProvider) {
+  constructor(public http: HttpClient, private _storage: StorageProvider) {
     console.log('Hello UserProvider Provider');
   }
   sendReg(user) {
@@ -45,11 +45,11 @@ export class UserProvider {
   }
 
   //update data from wizard page and patch user model
-  updateUserModel(data: any, id) {
+  updateUserModel(data: any,) {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     const creds = this.getCredentials()
     console.log(data, "#1-updateUserModel") 
-    this.storage.UpdateStorageObject('user', data)
+    this._storage.UpdateStorageObject('user', data)
     return this.http.patch(this.requestUrl + '/appUsers/' + creds.userId + '?access_token=' + creds.token, data, httpHeader)
   }
 
@@ -73,26 +73,24 @@ export class UserProvider {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     const creds = this.getCredentials() 
     console.log('onservice-logout')
-    this.storage.emptyStorage();
+    this._storage.emptyStorage();
     return this.http.post(this.requestUrl + "appUsers/logout?access_token=" + creds.token, {}, httpHeader);
   }
 
   getUser() {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'user'})}
     const creds = this.getCredentials() 
-    let request = this.http.get(this.requestUrl + 'appUsers/' + this.getCredentials().userId + '?access_token=' + creds.token, httpHeader);
-    request.subscribe(res => {
-      console.log(res)
-        this.userData = res;
-        this.storage.saveToStorage('user', res)
-      })
-    return request
+    return this.http.get(this.requestUrl + 'appUsers/' + this.getCredentials().userId + '?access_token=' + creds.token, httpHeader);
   }
 
   getUserChart() {
     let httpHeader = {headers: new HttpHeaders({cacheKey: 'chart'})}
     const creds = this.getCredentials()
     return this.http.get(this.requestUrl + 'appUsers/' + this.getCredentials().userId + '/charts?access_token=' + creds.token, httpHeader);
+  }
+
+  saveUserToStorage(user) {
+    this._storage.saveToStorage('user', user)
   }
 
 
