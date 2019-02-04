@@ -29,7 +29,7 @@ export class NetworkProvider {
     private plt: Platform,
   ) {
 
-    //this.previousStatus = ConnectionStatusEnum.Online;
+    this.previousStatus = ConnectionStatusEnum.Online;
     // this.plt.ready()
     //   .then(() => {
 
@@ -66,15 +66,27 @@ export class NetworkProvider {
             }
             this.previousStatus = ConnectionStatusEnum.Online;
         });
-        window.navigator['connection'].onchange = () => {
-          if(window.navigator.onLine) {
+        // window.navigator['connection'].onchange = () => {
+        //   if(window.navigator.onLine) {
+        //     this.eventCtrl.publish('network:online')
+        //     return this.previousStatus = ConnectionStatusEnum.Online
+        //   } 
+        //   this.eventCtrl.publish('network:offline')
+        //   return this.previousStatus = ConnectionStatusEnum.Offline;
+        // }
+        window.addEventListener('online', () => {
+          if(this.previousStatus === ConnectionStatusEnum.Offline) {
             this.eventCtrl.publish('network:online')
             return this.previousStatus = ConnectionStatusEnum.Online
-          } 
-          this.eventCtrl.publish('network:offline')
-          return this.previousStatus = ConnectionStatusEnum.Offline;
-        }
-       
+          }
+        })
+        window.addEventListener('offline', () => {
+          if(this.previousStatus === ConnectionStatusEnum.Online) {
+            console.log(this.previousStatus)
+            this.eventCtrl.publish('network:offline')
+            return this.previousStatus = ConnectionStatusEnum.Offline
+          }
+        })
     }
 
 
