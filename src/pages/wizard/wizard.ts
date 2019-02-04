@@ -59,6 +59,8 @@ export class WizardPage {
     this.user.getUser()
       .subscribe((data: UserData) => {
         this.name = data.firstName;
+        this.user.userData = data;
+        this.user.saveUserToStorage(data)
       })
   
       this.firstFormFunct();
