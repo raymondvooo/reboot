@@ -1,4 +1,16 @@
-<!-- Generated template for the TimelineGrandchildSublistComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-list>
+
+  <ion-item *ngFor="let data of timelineData">
+    <ion-label>{{data.title}}</ion-label>
+    <ion-checkbox slot="end" ></ion-checkbox>
+  </ion-item>
+
+</ion-list>
+
+<!-- <h1>Value {{itemValue}}</h1>
+
+<ion-list *ngFor="let item of grandchildList">
+  <button ion-item detail-none *ngIf="item.indexValue === itemValue">
+    {{item.titleItem}}
+  </button>
+</ion-list> -->

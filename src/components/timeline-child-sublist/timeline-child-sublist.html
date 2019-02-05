@@ -1,5 +1,33 @@
-<h1>Value {{segmentValue}}</h1>
+<h2>Index {{segmentValue}}</h2>
 
-<div *ngFor="let title of childList">
-  <button *ngIf="title.indexValue === segmentValue" ion-item>{{title.titleSubject}}</button>
-</div>
+<ion-list *ngFor="let data of timelineData; let i = index">
+
+  <button ion-item detail-none (click)="toggleAccordion(i)">
+    <ion-icon item-left name="arrow-forward" *ngIf="!data.isAccordionActive"></ion-icon>
+    <ion-icon item-left name="arrow-down" *ngIf="data.isAccordionActive"></ion-icon>
+
+    {{data.title}}
+  </button>
+
+  <ion-list *ngIf="data.isAccordionActive">
+    <timeline-grandchild-sublist [segmentValue]="segmentValue" [sectionValue]="i"></timeline-grandchild-sublist>
+  </ion-list>
+
+</ion-list>
+
+<!-- <h1>Index {{segmentValue}}</h1>
+
+<ion-list *ngFor="let item of childList; let i = index">
+  <button ion-item detail-none *ngIf="item.indexValue == segmentValue" (click)="toggleAccordion(i, item.subIndexValue)">
+    <ion-icon item-left name="arrow-forward" *ngIf="!item.isAccordionActive"></ion-icon>
+    <ion-icon item-left name="arrow-down" *ngIf="item.isAccordionActive"></ion-icon>
+
+    {{item.titleSubject}}
+  </button>
+
+  <ion-list *ngIf="item.isAccordionActive">
+    <ion-list-header>
+      <timeline-grandchild-sublist [itemValue]=item.subIndexValue></timeline-grandchild-sublist>
+    </ion-list-header>
+  </ion-list>
+</ion-list> -->

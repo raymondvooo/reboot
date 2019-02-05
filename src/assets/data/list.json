@@ -1,0 +1,289 @@
+[
+    {
+        "title": "Getting Out",
+        "children": [
+            {
+                "title": "Understanding the process of separating",
+                "children": [
+                    {
+                        "title": "Find out your separation date",
+                        "step": 1
+                    },
+                    {
+                        "title": "Complete Pre-Separation Counseling",
+                        "step": 2
+                    }
+                ]
+            },
+            {
+                "title": "Completing my paperwork",
+                "children": [
+                    {
+                        "title": "Prepare a criterion-based Individual Transition Plan (ITP)",
+                        "step": 3
+                    },
+                    {
+                        "title": "Complete a Continuum of Military Service Opportunity Counseling (Required Active Component Only)",
+                        "step": 4
+                    },
+                    {
+                        "title": "Evaluate transferability of military skills to civilian workforce",
+                        "step": 5
+                    },
+                    {
+                        "title": "Complete DoD Standardized Gap Analysis",
+                        "step": 6
+                    },
+                    {
+                        "title": "Document requirements and eligibility for licensure, certification, and apprenticeship",
+                        "step": 7
+                    },
+                    {
+                        "title": "Complete an assessment tool to identify personal interests and leanings regarding career selection",
+                        "step": 8
+                    },
+                    {
+                        "title": "Complete a job application package or receive a job offer letter",
+                        "step": 9
+                    },
+                    {
+                        "title": "Receive a DOL Gold Card and understand post 9/11 Veterans have priority at DOL American Job Centers",
+                        "step": 10
+                    }
+                ]
+            },
+            {
+                "title": "Engaging VA to access benefits",
+                "children": [
+                    {
+                        "title": "Complete the Veteran Affairs (VA) Benefits Briefings I and II",
+                        "step": 11
+                    },
+                    {
+                        "title": "Register on eBenefits",
+                        "step": 12
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Starting Up",
+        "children": [
+            {
+                "title": "Find something to do",
+                "children": [
+                    {
+                        "title": "Go to Career Center",
+                        "step": 13
+                    },
+                    {
+                        "title": "Vocational Rehab & Employment",
+                        "step": 14
+                    }
+                ]
+            },
+            {
+                "title": "Re-establishing and creating relationships",
+                "children": [
+                    {
+                        "title": "Check out vet center",
+                        "step": 15
+                    }
+                ]
+            },
+            {
+                "title": "Balancing finances",
+                "children": [
+                    {
+                        "title": "Open a savings account",
+                        "step": 16
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Taking care of myself",
+        "children": [
+            {
+                "title": "Recognizing and addressing mental health needs",
+                "children": [
+                    {
+                        "title": "Mental Health Care",
+                        "step": 17
+                    },
+                    {
+                        "title": "PTS services",
+                        "step": 18
+                    },
+                    {
+                        "title": "Psychological rehabilitation & recovery services",
+                        "step": 19
+                    },
+                    {
+                        "title": "Veteran Crisis Line",
+                        "step": 20
+                    },
+                    {
+                        "title": "MST counseling",
+                        "step": 21
+                    },
+                    {
+                        "title": "Social work",
+                        "step": 22
+                    }
+                ]
+            },
+            {
+                "title": "VA Health Care",
+                "children": [
+                    {
+                        "title": "Managing primary care",
+                        "step": 23
+                    },
+                    {
+                        "title": "Preventative care",
+                        "step": 24
+                    },
+                    {
+                        "title": "Chronic health issues",
+                        "step": 25
+                    },
+                    {
+                        "title": "Prescription services",
+                        "step": 26
+                    }
+                ]
+            },
+            {
+                "title": "Seeking support for acute health event",
+                "children": [
+                    {
+                        "title": "Emergency Care",
+                        "step": 27
+                    },
+                    {
+                        "title": "Specialized Care",
+                        "step": 28
+                    },
+                    {
+                        "title": "Pharmacy",
+                        "step": 29
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Reinventing myself",
+        "children": [
+            {
+                "title": "Acquiring the appropriate education, new skills, and credentials",
+                "children": [
+                    {
+                        "title": "Skills Translater - translating my military skills",
+                        "step": 30
+                    },
+                    {
+                        "title": "Career Center",
+                        "step": 31
+                    },
+                    {
+                        "title": "Resume builder services",
+                        "step": 32
+                    },
+                    {
+                        "title": "GI Bill",
+                        "step": 33
+                    },
+                    {
+                        "title": "Vocational Rehab, Education & Employment Counseling",
+                        "step": 34
+                    },
+                    {
+                        "title": "Build my professional network",
+                        "step": 35
+                    }
+                ]
+            },
+            {
+                "title": "Finding the right job",
+                "children": [
+                    {
+                        "title": "Veterans Job Bank",
+                        "step": 36
+                    },
+                    {
+                        "title": "VA employment",
+                        "step": 37
+                    },
+                    {
+                        "title": "Building my professional reputation",
+                        "step": 38
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Putting down roots",
+        "children": [
+            {
+                "title": "Maintaining my financial, social, and emotional health",
+                "children": [
+                    {
+                        "title": "VA Mental Health Center",
+                        "step": 39
+                    },
+                    {
+                        "title": "Veteran's pension",
+                        "step": 40
+                    },
+                    {
+                        "title": "Disability compensation",
+                        "step": 41
+                    },
+                    {
+                        "title": "Engaging VA to access benefits and services",
+                        "step": 42
+                    }
+                ]
+            },
+            {
+                "title": "Starting, growing, or taking care of my family",
+                "children": [
+                    {
+                        "title": "Revisit Housing",
+                        "step": 43
+                    },
+                    {
+                        "title": "VA Home Loan/Refinancing",
+                        "step": 44
+                    },
+                    {
+                        "title": "Planning and saving for my retirement",
+                        "step": 45
+                    },
+                    {
+                        "title": "Life Insurance",
+                        "step": 46
+                    }
+                ]
+            },
+            {
+                "title": "Connecting with, and serving my community",
+                "children": [
+                    {
+                        "title": "myVA Communities",
+                        "step": 47
+                    },
+                    {
+                        "title": "VSO's",
+                        "step": 48
+                    }
+                ]
+            }
+        ]
+    }
+]

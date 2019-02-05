@@ -1,6 +1,28 @@
 <ion-content>
+
   <section>
 
+    <ion-scroll scrollX="true" style=" white-space:nowrap; height: 100%; width: 100%; max-width: 700px">
+      <ion-row padding-top nowrap style="width: auto">
+        <ion-segment *ngFor="let data of timelineData; let i = index" [(ngModel)]="subject">
+          <ion-segment-button value={{i}}>{{data.title}}</ion-segment-button>
+        </ion-segment>
+      </ion-row>
+    </ion-scroll>
+
+  </section>
+
+  <div *ngFor="let data of timelineData; let i = index" [ngSwitch]="subject">
+
+    <ion-list *ngSwitchCase=i>
+      <ion-item>
+        <timeline-child-sublist [segmentValue]="i"></timeline-child-sublist>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+  <!-- <section>
     <ion-scroll scrollX="true" style=" white-space:nowrap; height: 100%; width: 100%; max-width: 700px">
       <ion-row padding-top nowrap style="width: auto;">
 
@@ -28,37 +50,13 @@
 
       </ion-row>
     </ion-scroll>
-  </section>
+  </section> -->
 
-  <!-- <div *ngFor="let item of testList; let i = index" [ngSwitch]="subject">
-
-    <ion-list *ngSwitchCase="i">
-      <ion-list-header *ngFor="let child of item.childrenSection; let j = index" no-lines no-padding>
-        <button ion-item (click)="toggleSection(i, j)" detail-none>
-          <ion-icon item-left name="arrow-forward" *ngIf="!child.open"></ion-icon>
-          <ion-icon item-left name="arrow-down" *ngIf="child.open"></ion-icon>
-          {{child.title}}
-        </button>
-
-        <ion-list *ngIf="child.grandchildrenItems && child.open">
-          <ion-list-header *ngFor="let grandchild of child.grandchildrenItems" no-lines no-padding>
-            <button ion-item detail-none>
-              {{grandchild.name}}
-            </button>
-          </ion-list-header>
-        </ion-list>
-      </ion-list-header>
-    </ion-list>
-  </div> -->
-
-  <div [ngSwitch]="subject">
+  <!-- <div [ngSwitch]="subject">
     <ion-list *ngSwitchCase="0">
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-puppy-1.jpg">
-        </ion-thumbnail>
 
-        <h2>Case 0</h2>
+        <h2>Getting Out</h2>
 
         <timeline-child-sublist [segmentValue]=subject></timeline-child-sublist>
       </ion-item>
@@ -66,11 +64,8 @@
 
     <ion-list *ngSwitchCase="1">
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-puppy-1.jpg">
-        </ion-thumbnail>
 
-        <h2>Case 1</h2>
+        <h2>Starting Up</h2>
 
         <timeline-child-sublist [segmentValue]=subject></timeline-child-sublist>
       </ion-item>
@@ -78,11 +73,8 @@
 
     <ion-list *ngSwitchCase="2">
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-puppy-1.jpg">
-        </ion-thumbnail>
 
-        <h2>Case 2</h2>
+        <h2>Self Care</h2>
 
         <timeline-child-sublist [segmentValue]=subject></timeline-child-sublist>
       </ion-item>
@@ -90,11 +82,8 @@
 
     <ion-list *ngSwitchCase="3">
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-puppy-1.jpg">
-        </ion-thumbnail>
 
-        <h2>Case 3</h2>
+        <h2>Reinventing Myself</h2>
 
         <timeline-child-sublist [segmentValue]=subject></timeline-child-sublist>
       </ion-item>
@@ -102,15 +91,12 @@
 
     <ion-list *ngSwitchCase="4">
       <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-puppy-1.jpg">
-        </ion-thumbnail>
 
-        <h2>Case 4</h2>
+        <h2>Settling Down</h2>
         
         <timeline-child-sublist [segmentValue]=subject></timeline-child-sublist>
       </ion-item>
     </ion-list>
-  </div>
+  </div> -->
 
 </ion-content>

@@ -19,8 +19,6 @@ import { TimelinePage } from '../pages/timeline/timeline';
 import { SelfAssessmentPage } from '../pages/self-assessment/self-assessment';
 import { HistoryPage } from '../pages/history/history';
 import { ResourcesPage } from '../pages/resources/resources';
-import { TimelineItemComponent } from '../components/timeline/timeline';
-import { TimelineTimeComponent } from '../components/timeline/timeline';
 import { ChartComponent } from '../components/chart/chart';
 import { ChartProvider } from '../providers/chart/chart';
 import { UserProvider } from '../providers/user/user';
@@ -40,6 +38,7 @@ import { ActionItemProvider } from '../providers/action-item/action-item';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { TimelineChildSublistComponent } from '../components/timeline-child-sublist/timeline-child-sublist';
 import { TimelineGrandchildSublistComponent } from '../components/timeline-grandchild-sublist/timeline-grandchild-sublist';
+import { TimelineListHandlerProvider } from '../providers/timeline-list-handler/timeline-list-handler';
 
 
 const Pages = [
@@ -64,8 +63,6 @@ const Pages = [
 @NgModule({
   declarations: [
     ...Pages,
-    TimelineItemComponent,
-    TimelineTimeComponent,
     NewsWidgetComponent,
     TimelineComponent,
     ResourcesPage,
@@ -109,7 +106,8 @@ const Pages = [
     Network,
     NetworkProvider,
     StorageProvider,
-    ActionItemProvider
+    ActionItemProvider,
+    TimelineListHandlerProvider
   ]
 })
 export class AppModule {}
