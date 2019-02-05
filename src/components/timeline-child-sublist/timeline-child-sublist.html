@@ -1,8 +1,6 @@
-<h2>Index {{segmentValue}}</h2>
-
 <ion-list *ngFor="let data of timelineData; let i = index">
 
-  <button ion-item detail-none (click)="toggleAccordion(i)">
+  <button ion-item detail-none (click)="toggleAccordion(i)" [ngClass]="{'section-active': data.isAccordionActive, 'section-inactive': !data.isAccordionActive}">
     <ion-icon item-left name="arrow-forward" *ngIf="!data.isAccordionActive"></ion-icon>
     <ion-icon item-left name="arrow-down" *ngIf="data.isAccordionActive"></ion-icon>
 

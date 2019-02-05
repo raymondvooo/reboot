@@ -1,3 +1,14 @@
 timeline-child-sublist {
 
+    .section-inactive{
+        background: white;
+        color: black;
+        margin-bottom: 4px;
+    }
+
+    .section-active{
+        background: color($colors, primary);
+        color: white;
+    }
+
 }
