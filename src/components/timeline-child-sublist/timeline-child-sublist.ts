@@ -8,9 +8,10 @@ import { TimelineListHandlerProvider } from '../../providers/timeline-list-handl
 })
 export class TimelineChildSublistComponent {
 
-  timelineData: any;
-
   @Input() segmentValue: number;
+  @Input() userTimelineData: any;
+
+  timelineData: any;
 
   constructor(public getTimeline: TimelineListHandlerProvider) {
     this.getTimeline.fetchTimelineData()

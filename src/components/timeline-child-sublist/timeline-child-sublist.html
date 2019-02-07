@@ -3,12 +3,11 @@
   <button ion-item detail-none (click)="toggleAccordion(i)" [ngClass]="{'section-active': data.isAccordionActive, 'section-inactive': !data.isAccordionActive}">
     <ion-icon item-left name="arrow-forward" *ngIf="!data.isAccordionActive"></ion-icon>
     <ion-icon item-left name="arrow-down" *ngIf="data.isAccordionActive"></ion-icon>
-
     {{data.title}}
   </button>
 
   <ion-list *ngIf="data.isAccordionActive">
-    <timeline-grandchild-sublist [segmentValue]="segmentValue" [sectionValue]="i"></timeline-grandchild-sublist>
+    <timeline-grandchild-sublist [segmentValue]="segmentValue" [sectionValue]="i" [userTimelineData]=userTimelineData></timeline-grandchild-sublist>
   </ion-list>
 
 </ion-list>

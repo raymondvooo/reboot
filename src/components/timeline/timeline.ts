@@ -10,11 +10,15 @@ export class TimelineComponent {
 
   subject: number = 0;
   timelineData: any;
+  userTimelineData: any;
 
   constructor(public getTimeline: TimelineListHandlerProvider) {
 
     this.getTimeline.fetchTimelineData()
       .subscribe(data => this.timelineData = data);
+    
+    this.getTimeline.fetchUserTimelineData()
+      .subscribe(data => this.userTimelineData = data)
 
   }
   

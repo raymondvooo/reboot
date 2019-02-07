@@ -2,7 +2,8 @@
 
   <ion-item *ngFor="let data of timelineData">
     <ion-label>{{data.title}}</ion-label>
-    <ion-checkbox slot="end"></ion-checkbox>
+    <ion-checkbox slot="end" checked="true" *ngIf="data.step <= userTimelineData[0].step" (ionChange)="checkboxChange($event)"></ion-checkbox>
+    <ion-checkbox slot="end" checked="false" *ngIf="data.step > userTimelineData[0].step" (ionChange)="checkboxChange($event)"></ion-checkbox>
   </ion-item>
 
 </ion-list>
